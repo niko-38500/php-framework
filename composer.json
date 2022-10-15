@@ -1,0 +1,28 @@
+{
+    "name": "niko/framework_php",
+    "description": "lightweight php framework",
+    "type": "framework",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "config": {
+        "platform": {
+            "php": "8.1"
+        }
+    },
+    "authors": [
+        {
+            "name": "niko-38500",
+            "email": "nicolas.montmayeur@hotmail.fr"
+        }
+    ],
+    "require": {
+        "php": "^8.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    }
+}
