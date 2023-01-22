@@ -1,0 +1,11 @@
+parameters:
+    level: max
+    paths:
+        - src
+    ignoreErrors:
+        - "#.*no value type specified in iterable type array.*#"
+
+        -
+            message: "#should return T of object but returns object\\.$#"
+            count: 1
+            path: src/Container.php
