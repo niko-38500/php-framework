@@ -5,11 +5,14 @@ declare(strict_types=1);
 namespace App\Components\Finder;
 
 use App\Components\Finder\Exception\DirectoryNotFoundException;
+use App\Components\Finder\Iterator\FilenameFilterIterator;
 
 class Finder
 {
     /** @var string[] */
     private array $dirs = [];
+    /** @var string[] */
+    private $filesNames = [];
     /** @var string[] */
     private array $excludedDirs = [];
 
@@ -44,6 +47,24 @@ class Finder
         return $this;
     }
 
+    /**
+     * Add rules that files must match, it can be either a glob patter or a regex
+     *
+     * example:
+     *
+     * $finder->fileName(['*.php', 'src/**\/\{abc, def}*.php']);
+     * $finder->fileName(['/*\.php$/', '*.php']);
+     * $finder->fileName('file.php');
+     *
+     * @param string|string[] $filesNames
+     */
+    public function fileName(string|array $filesNames): self
+    {
+        $this->filesNames = (array) $filesNames;
+
+        return $this;
+    }
+
     public function exclude(string|array $dirs): self
     {
         $this->excludedDirs = array_merge($this->excludedDirs, (array) $dirs);
@@ -53,56 +74,35 @@ class Finder
 
 
     /**
-     * @return string[]
+     * Search recursively into all the directories provided with "in()" method
+     *
+     * @return \Iterator<int, \SplFileInfo> Return an iterator with all found directories as SplFileInfo object
      */
-    public function findFilesFromPartialPath(string $partialPath, ?string $extension = null): array
+    private function searchInDirectory(string $dir): \Iterator
     {
-        $a = new \RecursiveDirectoryIterator('./');
-        $files = [];
 
-        $formattedPath = $this->normalizePath($partialPath);
+        $iterator = new \RecursiveDirectoryIterator($dir, \RecursiveDirectoryIterator::SKIP_DOTS);
+        $iterator = new \RecursiveIteratorIterator($iterator);
 
-        $basePath = realpath('');
-        $realPath = realpath($basePath . DIRECTORY_SEPARATOR . $formattedPath);
-
-        $reg = '/(?!\/)[a-zA-Z0-9_\-]+' . ($extension ? ('\\' . $extension . '$/') : '\.[a-z]{1,10}/');
-        $regexIterator = $this->getDirectoryIterator($realPath, $reg);
-
-        /** @var \SplFileInfo $file */
-        foreach ($regexIterator as $file) {
-            if (!preg_match('/vendor/', $file->getPath())) {
-                $files[] = current(glob($file->getPath() . '/' . $file->getFilename()));
-            }
-        }
-
-        return $files;
-    }
-
-    private function getDirectoryIterator(
-        string $path,
-        ?string $pattern = null
-    ): \RecursiveIteratorIterator|\RegexIterator {
-        $directoryIterator = new \RecursiveDirectoryIterator($path);
-        $iterator = new \RecursiveIteratorIterator($directoryIterator);
-
-        if ($pattern) {
-            return new \RegexIterator($iterator, $pattern);
+        if (!empty($this->filesNames)) {
+            $iterator = new FilenameFilterIterator($iterator, $this->filesNames);
         }
 
         return $iterator;
     }
 
-    public function normalizePath(string $basePath): string
+    public function getIterator(): \Iterator
     {
-        $formattedPath = str_replace('/', DIRECTORY_SEPARATOR, $basePath);
-        $formattedPath = preg_replace([
-                '/\/\*?$/',
-                '/^\.\//'
-            ],
-            '',
-            $formattedPath
-        );
+        if (count($this->dirs) === 0) {
+            throw new \LogicException('You must call one of in() method before iterating over a Finder.');
+        }
 
-        return $formattedPath;
+        $iterator = new \AppendIterator();
+
+        foreach ($this->dirs as $dir) {
+            $iterator->append($this->searchInDirectory($dir));
+        }
+
+        return $iterator;
     }
 }

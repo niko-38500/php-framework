@@ -2,85 +2,153 @@
 
 namespace App\Components\Finder\Tests;
 
+use App\Components\Finder\Exception\DirectoryNotFoundException;
 use App\Components\Finder\Finder;
+use App\Components\Finder\Utils\RegexHelper;
 use PHPUnit\Framework\TestCase;
 
 class FinderTest extends TestCase
 {
-    protected Finder $finder;
-
-    protected function setUp(): void
+    public function testGetIteratorWhenEmptyDirs(): void
     {
-        $this->finder = new Finder();
+        self::expectException(\LogicException::class);
+        $this->expectExceptionMessage('You must call one of in() method before iterating over a Finder.');
+        $finder = new Finder();
+        $finder->getIterator();
     }
 
-    protected function pathToFilesProvider(): array
+    public function testGetIterator(): void
     {
-        return [
+        $finder = new Finder();
+
+        self::assertInstanceOf(
+            \Iterator::class,
+            $finder->in(__DIR__ . DIRECTORY_SEPARATOR . 'DataFixtures/TestScanDirectory')->getIterator()
+        );
+    }
+
+    public function testHasExceptionOnDirectoryNotFound(): void
+    {
+        $finder = new Finder();
+        $path = 'unexisting/directory';
+        $this->expectException(DirectoryNotFoundException::class);
+        $this->expectExceptionMessage(sprintf('directory %s not found', $path));
+        $finder->in($path);
+    }
+
+    protected function pathToFilesProvider(): \Iterator
+    {
+        yield 'with non existing file name' => ['DataFixtures/TestScanDirectoryWithEmptyFiles', '*.noxist', []];
+        yield 'with non existing file name#2' => ['DataFixtures/TestScanDirectoryWithEmptyFiles', 'this_file.notxist', []];
+        yield 'with json extension' => [
+            'DataFixtures/TestScanDirectoryWithEmptyFiles',
+            '*.json',
+            [new \SplFileInfo(__DIR__ . '/DataFixtures/TestScanDirectoryWithEmptyFiles/d.json')]
+        ];
+
+        yield 'with yaml extension' => [
+            'DataFixtures/TestScanDirectoryWithEmptyFiles',
+            '*.yaml',
+            [new \SplFileInfo(__DIR__ . '/DataFixtures/TestScanDirectoryWithEmptyFiles/b/e.yaml')]
+        ];
+
+        yield 'with neon extension' => [
+            'DataFixtures/TestScanDirectoryWithEmptyFiles',
+            '*.neon',
+            [new \SplFileInfo(__DIR__ . '/DataFixtures/TestScanDirectoryWithEmptyFiles/b/c/f.neon')]
+        ];
+
+        yield 'with php extension' => [
+            'DataFixtures/TestScanDirectory',
+            '*.php',
             [
-                './DataFixtures/TestScanDirectory/*',
-                '.php',
-                [
-                    __DIR__ . '/DataFixtures/TestScanDirectory/ClassFile.php',
-                    __DIR__ . '/DataFixtures/TestScanDirectory/Interface.php',
-                    __DIR__ . '/DataFixtures/TestScanDirectory/file-w1th_numb3r.php',
-                    __DIR__ . '/DataFixtures/TestScanDirectory/kebab-case-file.php',
-                    __DIR__ . '/DataFixtures/TestScanDirectory/sneak_case_file.php'
-                ],
+                new \SplFileInfo(__DIR__ . '/DataFixtures/TestScanDirectory/ClassFile.php'),
+                new \SplFileInfo(__DIR__ . '/DataFixtures/TestScanDirectory/Interface.php'),
+                new \SplFileInfo(__DIR__ . '/DataFixtures/TestScanDirectory/file-w1th_numb3r.php'),
+                new \SplFileInfo(__DIR__ . '/DataFixtures/TestScanDirectory/kebab-case-file.php'),
+                new \SplFileInfo(__DIR__ . '/DataFixtures/TestScanDirectory/sneak_case_file.php'),
             ],
+        ];
+
+        yield 'with php extension #2' => [
+            'DataFixtures/TestScanDirectoryWithEmptyFiles',
+            '*.php',
             [
-                './DataFixtures/TestScanDirectory/*',
-                '',
-                [
-                    __DIR__ . '/DataFixtures/TestScanDirectory/A.json',
-                    __DIR__ . '/DataFixtures/TestScanDirectory/ClassFile.php',
-                    __DIR__ . '/DataFixtures/TestScanDirectory/Interface.php',
-                    __DIR__ . '/DataFixtures/TestScanDirectory/file-w1th_numb3r.php',
-                    __DIR__ . '/DataFixtures/TestScanDirectory/kebab-case-file.php',
-                    __DIR__ . '/DataFixtures/TestScanDirectory/sneak_case_file.php'
-                ],
+                new \SplFileInfo(__DIR__ . '/DataFixtures/TestScanDirectoryWithEmptyFiles/a.php'),
+                new \SplFileInfo(__DIR__ . '/DataFixtures/TestScanDirectoryWithEmptyFiles/b/b.php'),
+                new \SplFileInfo(__DIR__ . '/DataFixtures/TestScanDirectoryWithEmptyFiles/b/c/c.php'),
             ],
+        ];
+
+        yield 'without file name' => [
+            'DataFixtures/TestScanDirectory',
+            '',
             [
-                './DataFixtures/TestScanDirectoryWithEmptyFiles/*',
-                '.php',
-                [
-                    __DIR__ . '/DataFixtures/TestScanDirectoryWithEmptyFiles/a.php',
-                    __DIR__ . '/DataFixtures/TestScanDirectoryWithEmptyFiles/b/b.php',
-                    __DIR__ . '/DataFixtures/TestScanDirectoryWithEmptyFiles/b/c/c.php',
-                ],
+                new \SplFileInfo(__DIR__ . '/DataFixtures/TestScanDirectory/A.json'),
+                new \SplFileInfo(__DIR__ . '/DataFixtures/TestScanDirectory/ClassFile.php'),
+                new \SplFileInfo(__DIR__ . '/DataFixtures/TestScanDirectory/Interface.php'),
+                new \SplFileInfo(__DIR__ . '/DataFixtures/TestScanDirectory/file-w1th_numb3r.php'),
+                new \SplFileInfo(__DIR__ . '/DataFixtures/TestScanDirectory/kebab-case-file.php'),
+                new \SplFileInfo(__DIR__ . '/DataFixtures/TestScanDirectory/sneak_case_file.php'),
             ],
-            ['./DataFixtures/TestScanDirectoryWithEmptyFiles/*', '.noxist', []],
-            ['./DataFixtures/TestScanDirectoryWithEmptyFiles/*', '.json', [__DIR__ . '/DataFixtures/TestScanDirectoryWithEmptyFiles/d.json']],
-            ['./DataFixtures/TestScanDirectoryWithEmptyFiles/*', '.yaml', [__DIR__ . '/DataFixtures/TestScanDirectoryWithEmptyFiles/b/e.yaml']],
-            ['./DataFixtures/TestScanDirectoryWithEmptyFiles/*', '.neon', [__DIR__ . '/DataFixtures/TestScanDirectoryWithEmptyFiles/b/c/f.neon']],
+        ];
+
+        yield 'without file name #2' => [
+            'DataFixtures/TestScanDirectoryWithEmptyFiles',
+            '',
             [
-                './DataFixtures/TestScanDirectoryWithEmptyFiles/*',
-                '',
-                [
-                    __DIR__ . '/DataFixtures/TestScanDirectoryWithEmptyFiles/a.php',
-                    __DIR__ . '/DataFixtures/TestScanDirectoryWithEmptyFiles/b/b.php',
-                    __DIR__ . '/DataFixtures/TestScanDirectoryWithEmptyFiles/b/c/c.php',
-                    __DIR__ . '/DataFixtures/TestScanDirectoryWithEmptyFiles/b/c/f.neon',
-                    __DIR__ . '/DataFixtures/TestScanDirectoryWithEmptyFiles/b/e.yaml',
-                    __DIR__ . '/DataFixtures/TestScanDirectoryWithEmptyFiles/d.json',
-                ]
-            ],
-            [
-                './DataFixtures',
-                '',
-                [
-                    realpath(__DIR__ . '../DataFixturesForTest/a.js'),
-                    realpath(__DIR__ . '../DataFixturesForTest/b/b.py'),
-                    realpath(__DIR__ . '/DataFixturesForTest/b/c/c.php'),
-                ]
-            ],
+                new \SplFileInfo(__DIR__ . '/DataFixtures/TestScanDirectoryWithEmptyFiles/a.php'),
+                new \SplFileInfo(__DIR__ . '/DataFixtures/TestScanDirectoryWithEmptyFiles/b/b.php'),
+                new \SplFileInfo(__DIR__ . '/DataFixtures/TestScanDirectoryWithEmptyFiles/b/c/c.php'),
+                new \SplFileInfo(__DIR__ . '/DataFixtures/TestScanDirectoryWithEmptyFiles/b/c/f.neon'),
+                new \SplFileInfo(__DIR__ . '/DataFixtures/TestScanDirectoryWithEmptyFiles/b/e.yaml'),
+                new \SplFileInfo(__DIR__ . '/DataFixtures/TestScanDirectoryWithEmptyFiles/d.json'),
+            ]
         ];
     }
 
     /**
-     * @dataProvider pathToFilesProvider
+     * @param \Iterator<\SplFileInfo> $iterator
+     * @param \SplFileInfo[] $expected
      */
-    public function testInDirs(string $path, string $extension, array $expectedFiles): void
+    private function assertIterator(\Iterator $iterator, array $expected): void
+    {
+        $expectedResults = array_map(
+            fn(\SplFileInfo $fileInfo) => str_replace('/', DIRECTORY_SEPARATOR, $fileInfo->getPathname()),
+            $expected
+        );
+
+        $actualValues = array_map(
+            fn(\SplFileInfo $fileInfo) => str_replace('/', DIRECTORY_SEPARATOR, $fileInfo->getPathname()),
+            iterator_to_array($iterator)
+        );
+
+        sort($expectedResults);
+        sort($actualValues);
+
+        self::assertSame($expectedResults, $actualValues);
+    }
+
+    /**
+     * @dataProvider pathToFilesProvider
+     *
+     * @param string|string[] $path
+     * @param string|string[] $fileName
+     * @param \SplFileInfo[] $expected
+     */
+    public function testIteratorHasFiles(string|array $path, string|array $fileName, array $expected): void
+    {
+        $finder = new Finder();
+        $finder->in(__DIR__ . DIRECTORY_SEPARATOR . $path);
+
+        if (!empty($fileName)) {
+            $finder->fileName($fileName);
+        }
+
+        $this->assertIterator($finder->getIterator(), $expected);
+    }
+
+    public function testInDirs(): void
     {
         $finder = new Finder();
         $dir = [__DIR__ . DIRECTORY_SEPARATOR . 'DataFixtures'];
@@ -92,32 +160,27 @@ class FinderTest extends TestCase
         self::assertSame($dir, $a->getProperty('dirs')->getValue($finder));
     }
 
-    /**
-     * @dataProvider pathToFilesProvider
-     */
-    public function testFindResourceRecursively(string $path, string $extension, array $expectedFiles): void
+    public function globToRegexProvider(): \Iterator
     {
-        $actualFiles = $this->finder->findFilesFromPartialPath($path, $extension);
-        sort($actualFiles);
-
-        self::assertSame($expectedFiles, $actualFiles);
-    }
-
-    protected function pathProvider(): array
-    {
-        return [
-            ['../src/*', '../src'],
-            ['../src/', '../src'],
-            ['./src', 'src'],
-            ['./src/', 'src'],
+        yield 'with curly braces' => [
+            'src/{ici,la,un_autre_file,ou_la}*.php',
+            '#^src/(?:ici|la|un_autre_file|ou_la)[^/]*\.php$#'
         ];
+
+        yield 'with wildcard ' => ['**/*.php', '#^[^/]*[^/]*/[^/]*\.php$#'];
+
+        yield 'with escaped character ' => ['**/*\*.php', '#^[^/]*[^/]*/[^/]*\*\.php$#'];
+
+        yield 'with file extension' => ['*.php', '#^[^/]*\.php$#'];
     }
 
     /**
-     * @dataProvider pathProvider
+     * @dataProvider globToRegexProvider
      */
-    public function testFormatPath(string $basePath, string $expectedPath): void
+    public function testGlobToRegex(string $glob, string $expected): void
     {
-        self::assertSame($expectedPath, $this->finder->normalizePath($basePath));
+        $reg = RegexHelper::globToRegex($glob);
+
+        self::assertSame($expected, $reg);
     }
 }
