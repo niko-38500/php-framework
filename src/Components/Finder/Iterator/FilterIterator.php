@@ -25,14 +25,16 @@ abstract class FilterIterator extends \FilterIterator
         protected array $matchRegexps,
         protected array $noMatchRegexps = []
     ) {
-
-
         parent::__construct($iterator);
     }
 
     protected function isAccepted(string $name): bool
     {
         foreach ($this->noMatchRegexps as $noMatchPattern) {
+            if (!RegexHelper::isRegex($noMatchPattern)) {
+                $noMatchPattern = RegexHelper::globToRegex($noMatchPattern);
+            }
+
             if (preg_match($noMatchPattern, $name)) {
                 return false;
             }
@@ -40,7 +42,9 @@ abstract class FilterIterator extends \FilterIterator
 
         if ($this->matchRegexps) {
             foreach ($this->matchRegexps as $matchPattern) {
-                $matchPattern = RegexHelper::globToRegex($matchPattern);
+                if (!RegexHelper::isRegex($matchPattern)) {
+                    $matchPattern = RegexHelper::globToRegex($matchPattern);
+                }
 
                 if (preg_match($matchPattern, $name)) {
                     return true;
@@ -60,8 +64,4 @@ abstract class FilterIterator extends \FilterIterator
     {
         return $this->current();
     }
-
-    // /src/{ici,la,un_autre_file,ou_la}*.php => #^(?=[^\.])/(?=[^\.])src/(?=[^\.])(ici|la|un_autre_file|ou_la)[^/]*\.php$#
-    //
-    // **/*.php => #^(?=[^\.])[^/]*[^/]*/(?=[^\.])[^/]*\.php$#
 }

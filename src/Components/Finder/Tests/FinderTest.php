@@ -148,16 +148,51 @@ class FinderTest extends TestCase
         $this->assertIterator($finder->getIterator(), $expected);
     }
 
-    public function testInDirs(): void
+    public function testIteratorWithExcludedFiles(): void
     {
         $finder = new Finder();
-        $dir = [__DIR__ . DIRECTORY_SEPARATOR . 'DataFixtures'];
+        $iterator = $finder
+            ->in(__DIR__ . '/DataFixtures/TestScanDirectoryWithEmptyFiles')
+            ->notFilename('*.php')
+            ->getIterator()
+        ;
 
-        $finder->in($dir);
+        $this->assertIterator($iterator, [
+            new \SplFileInfo(__DIR__ . '/DataFixtures/TestScanDirectoryWithEmptyFiles/d.json'),
+            new \SplFileInfo(__DIR__ . '/DataFixtures/TestScanDirectoryWithEmptyFiles/b/e.yaml'),
+            new \SplFileInfo(__DIR__ . '/DataFixtures/TestScanDirectoryWithEmptyFiles/b/c/f.neon'),
+        ]);
+    }
 
-        $a = new \ReflectionClass($finder);
+    public function testIteratorWithExcludedPaths(): void
+    {
+        $finder = new Finder();
+        $iterator = $finder
+            ->in(__DIR__ . '/DataFixtures/TestScanDirectoryWithEmptyFiles')
+            ->exclude('b/c')
+            ->fileName('/.*\.php/')
+            ->getIterator()
+        ;
 
-        self::assertSame($dir, $a->getProperty('dirs')->getValue($finder));
+        $this->assertIterator($iterator, [
+            new \SplFileInfo(__DIR__ . '/DataFixtures/TestScanDirectoryWithEmptyFiles/a.php'),
+            new \SplFileInfo(__DIR__ . '/DataFixtures/TestScanDirectoryWithEmptyFiles/b/b.php'),
+        ]);
+    }
+
+    public function testIteratorWithMandatoryPath(): void
+    {
+        $finder = new Finder();
+        $iterator = $finder
+            ->in(__DIR__ . '/DataFixtures/TestScanDirectoryWithEmptyFiles')
+            ->mandatoryPath('b/c')
+            ->getIterator()
+        ;
+
+        $this->assertIterator($iterator, [
+            new \SplFileInfo(__DIR__ . '/DataFixtures/TestScanDirectoryWithEmptyFiles/b/c/c.php'),
+            new \SplFileInfo(__DIR__ . '/DataFixtures/TestScanDirectoryWithEmptyFiles/b/c/f.neon'),
+        ]);
     }
 
     public function globToRegexProvider(): \Iterator

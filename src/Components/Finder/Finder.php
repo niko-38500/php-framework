@@ -6,15 +6,21 @@ namespace App\Components\Finder;
 
 use App\Components\Finder\Exception\DirectoryNotFoundException;
 use App\Components\Finder\Iterator\FilenameFilterIterator;
+use App\Components\Finder\Iterator\PathnameFilterIterator;
+use App\Components\Finder\Iterator\RecursiveDirectoryIterator;
 
 class Finder
 {
     /** @var string[] */
     private array $dirs = [];
     /** @var string[] */
-    private $filesNames = [];
+    private array $filesNames = [];
     /** @var string[] */
-    private array $excludedDirs = [];
+    private array $notFilesNames = [];
+    /** @var string[] */
+    private array $excludedPath = [];
+    /** @var string[] */
+    private array $mandatoryPaths = [];
 
     /**
      * Searches files and directories which match defined rules.
@@ -65,9 +71,23 @@ class Finder
         return $this;
     }
 
+    public function notFilename(string|array $notFileNames): self
+    {
+        $this->notFilesNames = array_merge($this->notFilesNames, (array) $notFileNames);
+
+        return $this;
+    }
+
     public function exclude(string|array $dirs): self
     {
-        $this->excludedDirs = array_merge($this->excludedDirs, (array) $dirs);
+        $this->excludedPath = array_merge($this->excludedPath, (array) $dirs);
+
+        return $this;
+    }
+
+    public function mandatoryPath(string|array $paths): self
+    {
+        $this->mandatoryPaths = array_merge($this->mandatoryPaths, (array) $paths);
 
         return $this;
     }
@@ -81,11 +101,15 @@ class Finder
     private function searchInDirectory(string $dir): \Iterator
     {
 
-        $iterator = new \RecursiveDirectoryIterator($dir, \RecursiveDirectoryIterator::SKIP_DOTS);
+        $iterator = new RecursiveDirectoryIterator($dir, RecursiveDirectoryIterator::SKIP_DOTS);
         $iterator = new \RecursiveIteratorIterator($iterator);
 
-        if (!empty($this->filesNames)) {
-            $iterator = new FilenameFilterIterator($iterator, $this->filesNames);
+        if (!empty($this->filesNames) || !empty($this->notFilesNames)) {
+            $iterator = new FilenameFilterIterator($iterator, $this->filesNames, $this->notFilesNames);
+        }
+
+        if (!empty($this->excludedPath) || !empty($this->mandatoryPaths)) {
+            $iterator = new PathnameFilterIterator($iterator, $this->mandatoryPaths, $this->excludedPath);
         }
 
         return $iterator;
