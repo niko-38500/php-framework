@@ -3,7 +3,10 @@
     "description": "A finder to scan directory about files and classes",
     "autoload": {
         "psr-4": {
-            "Finder\\": "src/"
+            "Finder\\": "",
+            "exclude-from-classmap": [
+                "/Tests/"
+            ]
         }
     },
     "autoload-dev": {

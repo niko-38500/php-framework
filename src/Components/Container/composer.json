@@ -19,7 +19,10 @@
     },
     "autoload": {
         "psr-4": {
-            "Container\\": "src/"
+            "Container\\": "",
+            "exclude-from-classmap": [
+                "/Tests/"
+            ]
         }
     },
     "autoload-dev": {
