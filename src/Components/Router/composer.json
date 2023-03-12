@@ -1,0 +1,19 @@
+{
+    "name": "niko/router",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Niko\\Router\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "niko-38500",
+            "email": "nicolas.montmayeur@hotmail.fr"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^10.0"
+    }
+}

@@ -6,13 +6,13 @@ namespace App\Components\EventDispatcher;
 
 class EventDispatcher implements EventDispatcherInterface
 {
-    public function __construct()
+    /**
+     * @param callable[] $listeners
+     */
+    public function dispatch(array $listeners, Event $event): void
     {
-    }
-
-    public function dispatch(Event $event): void
-    {
-        $eventName = $event::class;
-
+        foreach ($listeners as $listener) {
+            $listener($event);
+        }
     }
 }

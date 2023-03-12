@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Components\EventDispatcher\Tests;
 
-use App\Components\EventDispatcher\Event;
-use App\Components\EventDispatcher\EventRegister;
+use App\Components\EventDispatcher\EventDispatcher;
+use App\Components\EventDispatcher\EventsManager;
 use App\Components\EventDispatcher\Exception\ListenerNotFoundException;
 use App\Components\EventDispatcher\Tests\Tools\DataFixtures\TestCustomEvent;
 use App\Components\EventDispatcher\Tests\Tools\DataFixtures\TestEventSubscriber;
 use PHPUnit\Framework\TestCase;
 
-class EventSubscriberTest extends TestCase
+class EventsManagerTest extends TestCase
 {
     private function assertListeners(array $callbacks): void
     {
@@ -21,7 +21,7 @@ class EventSubscriberTest extends TestCase
     }
     public function testSubscribeEvent(): void
     {
-        $eventSubscriber = new EventRegister();
+        $eventSubscriber = new EventsManager(new EventDispatcher());
 
         $eventSubscriber->registerListener(TestCustomEvent::class, function (TestCustomEvent $event) { return $event; });
 
@@ -35,14 +35,14 @@ class EventSubscriberTest extends TestCase
 
     public function testExceptionListenerNotExists(): void
     {
-        $eventSubscriber = new EventRegister();
+        $eventSubscriber = new EventsManager(new EventDispatcher());
         $this->expectException(ListenerNotFoundException::class);
         $eventSubscriber->getListeners('foo.bar');
     }
 
     public function testRegisterSubscriber(): void
     {
-        $eventSubscriber = new EventRegister();
+        $eventSubscriber = new EventsManager(new EventDispatcher());
         $event = new TestCustomEvent();
         $eventSubscriber->registerSubscriber(new TestEventSubscriber());
 

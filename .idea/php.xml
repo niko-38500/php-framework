@@ -45,6 +45,7 @@
   </component>
   <component name="PhpProjectServersManager">
     <servers>
+      <server host="localhost" id="5720b260-8b48-4cec-9699-225ee8a87887" name="localhost" port="3300" />
       <server host="localhost" id="ee3aae6f-c60a-4118-abb0-68e5a9e89b1a" name="php" port="1122" />
     </servers>
   </component>

@@ -8,6 +8,7 @@ use App\Components\EventDispatcher\EventSubscriberInterface;
 
 class TestEventSubscriber implements EventSubscriberInterface
 {
+    public const NAME = 'sdfdsf';
     public function getSubscribedEvents(): array
     {
         return [

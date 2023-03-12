@@ -6,5 +6,8 @@ namespace App\Components\EventDispatcher;
 
 interface EventDispatcherInterface
 {
-    public function dispatch(Event $event): void;
+    /**
+     * @param callable[] $listeners
+     */
+    public function dispatch(array $listeners, Event $event): void;
 }

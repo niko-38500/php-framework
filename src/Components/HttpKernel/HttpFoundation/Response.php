@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Components\HttpFoundation;
+namespace App\Components\HttpKernel\HttpFoundation;
 
 class Response
 {
@@ -16,5 +16,11 @@ class Response
     public function getResponseCode(): ResponseCode
     {
         return $this->code;
+    }
+
+    public function send()
+    {
+        header('Content-Type: text/html');
+        echo $this->getContent();
     }
 }

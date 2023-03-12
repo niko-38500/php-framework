@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Components\HttpFoundation;
+namespace App\Components\HttpKernel\HttpFoundation;
 
 enum ResponseCode: int
 {
-
     case HTTP_CONTINUE = 100;
     case HTTP_SWITCHING_PROTOCOLS = 101;
     case HTTP_PROCESSING = 102;                                                  // RFC2518

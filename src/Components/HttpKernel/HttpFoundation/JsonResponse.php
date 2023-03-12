@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Components\HttpFoundation;
+namespace App\Components\HttpKernel\HttpFoundation;
 
 class JsonResponse extends Response
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Components\HttpFoundation\Bag;
+namespace App\Components\HttpKernel\HttpFoundation\Bag;
 
 class InputBag extends ParameterBag
 {

@@ -2,6 +2,8 @@ parameters:
     level: max
     paths:
         - src
+    excludePaths:
+        - src/*/vendor/*
     ignoreErrors:
         - "#.*no value type specified in iterable type array.*#"
 
