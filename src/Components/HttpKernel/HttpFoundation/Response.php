@@ -18,7 +18,7 @@ class Response
         return $this->code;
     }
 
-    public function send()
+    public function send(): void
     {
         header('Content-Type: text/html');
         echo $this->getContent();

@@ -5,17 +5,17 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Niko\\HttpKernel\\": ""
+            "App\\Components\\HttpKernel\\": ""
         },
         "exclude-from-classmap": [
             "/Tests/"
         ]
     },
     "autoload-dev": {
-    "psr-4": {
-        "Finder\\Tests\\": "Tests/"
-    }
-},
+        "psr-4": {
+            "Finder\\Tests\\": "Tests/"
+        }
+    },
     "authors": [
         {
             "name": "niko-38500",

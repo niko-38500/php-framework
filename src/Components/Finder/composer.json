@@ -4,15 +4,15 @@
     "description": "A finder to scan directory about files and classes",
     "autoload": {
         "psr-4": {
-            "Finder\\": "",
-            "exclude-from-classmap": [
-                "/Tests/"
-            ]
-        }
+            "App\\Components\\Finder\\": ""
+        },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
-            "Finder\\Tests\\": "Tests/"
+            "App\\Components\\Finder\\Tests\\": "Tests/"
         }
     },
     "authors": [

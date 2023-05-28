@@ -27,9 +27,4 @@ class HttpKernelTest extends TestCase
 
         $httpKernel->handle($request);
     }
-
-    public function test(): 
-    {
-        
-    }
 }
