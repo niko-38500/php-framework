@@ -19,7 +19,7 @@ class HttpKernel
         $this->initErrorHandling($errorHandler);
         $this->initExceptionHandling($exceptionHandler);
         $dotEnvParameters = $this->getDotEnvParameters();
-        $config = $this->getConfigFilesParameters();
+        $config = $this->getConfigFilesParameters($dotEnvParameters);
         Container::init(new ParameterBag());
     }
 
