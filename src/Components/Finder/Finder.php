@@ -115,6 +115,9 @@ class Finder
         return $iterator;
     }
 
+    /**
+     * @return \Iterator<int, \SplFileInfo>
+     */
     public function getIterator(): \Iterator
     {
         if (count($this->dirs) === 0) {

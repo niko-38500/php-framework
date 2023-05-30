@@ -17,6 +17,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/Components/Finder/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/Components/HttpKernel/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/Components/Routing/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Components/Debug" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/src/Components/Container/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/src/Components/Container/vendor/doctrine/instantiator" />
       <excludeFolder url="file://$MODULE_DIR$/src/Components/Container/vendor/myclabs/deep-copy" />
