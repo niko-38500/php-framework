@@ -46,7 +46,7 @@ interface ContainerInterface
     public function getParameter(string $parameter): string|int|float|array|bool;
 
     /**
-     * Set a parameter into the parameter bag
+     * Set a parameter into the parameter bag if you defined a parameter twice it will be overwritten
      *
      * @throws DuplicateException
      */

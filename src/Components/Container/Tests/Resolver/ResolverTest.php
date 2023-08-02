@@ -81,7 +81,7 @@ class ResolverTest extends TestCase
         $this->expectException(AutowireException::class);
         $this->expectExceptionMessage(
             'Can not autowire the parameter $boundParameter for the class ' .
-            'Container\Tests\Tools\DataFixtures\DummyClass\ClassWithDependencyAndParameter'
+            'App\Components\Container\Tests\Tools\DataFixtures\DummyClass\ClassWithDependencyAndParameter'
         );
         $this->resolver->resolve(ClassWithDependencyAndParameter::class);
     }

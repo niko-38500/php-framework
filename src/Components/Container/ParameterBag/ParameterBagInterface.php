@@ -12,9 +12,6 @@ interface ParameterBagInterface
      */
     public function get(string $id): string|int|float|array|bool;
 
-    /**
-     * @throws DuplicateException
-     */
     public function set(string $id, string|int|float|array|bool $value): void;
 
     public function has(string $id): bool;

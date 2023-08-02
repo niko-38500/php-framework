@@ -85,12 +85,12 @@ class ContainerTest extends TestCase
         self::assertSame('value', $this->container->getParameter('key'));
     }
 
-    public function testSetParameterWithDuplicate(): void
+    public function testSetParameterTwice(): void
     {
         $this->container->setParameter('key', 'value');
-        $this->expectException(DuplicateException::class);
-        $this->expectExceptionMessage('Parameter key is already registered');
-        $this->container->setParameter('key', 'value');
+        $this->container->setParameter('key', 'value2');
+
+        self::assertEquals('value2', $this->container->getParameter('key'));
     }
 
     public function testGetParameterWithBadKey(): void

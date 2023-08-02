@@ -10,7 +10,7 @@ use App\Components\Container\Exception\Container\NotFoundException;
 class ParameterBag implements ParameterBagInterface
 {
     /** @var (bool|string|int|float|array)[] */
-    private array $parameters;
+    private array $parameters = [];
 
     public function get(string $id): string|int|float|array|bool
     {
@@ -23,10 +23,6 @@ class ParameterBag implements ParameterBagInterface
 
     public function set(string $id, float|int|array|string|bool $value): void
     {
-        if ($this->has($id)) {
-            throw new DuplicateException(sprintf('Parameter %s is already registered', $id));
-        }
-
         $this->parameters[$id] = $value;
     }
 

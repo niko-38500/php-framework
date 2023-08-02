@@ -4,6 +4,7 @@ namespace App\Components\Container;
 use App\Components\Container\Exception\Container\ContainerNotInitException;
 use App\Components\Container\Exception\Container\DuplicateException;
 use App\Components\Container\Exception\Container\NotFoundException;
+use App\Components\Container\ParameterBag\ParameterBag;
 use App\Components\Container\ParameterBag\ParameterBagInterface;
 
 class Container implements ContainerInterface
@@ -18,13 +19,15 @@ class Container implements ContainerInterface
     /**
      * Initialize the container with the needed dependencies
      */
-    public static function init(ParameterBagInterface $parameterBag): void
+    public static function init(?ParameterBagInterface $parameterBag = null): self
     {
-        if (self::$instance) {
-            return;
+        $parameterBag ??= new ParameterBag();
+
+        if (!self::$instance) {
+            self::$instance = new self($parameterBag);
         }
 
-        self::$instance = new self($parameterBag);
+        return self::$instance;
     }
 
     /**

@@ -1,0 +1,8 @@
+parameters:
+  test: test
+
+services:
+  _default:
+    bind:
+      string $test: %test%
+      string $env: %env(ENV)%

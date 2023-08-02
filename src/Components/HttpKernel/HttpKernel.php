@@ -39,7 +39,7 @@ class HttpKernel
 
         foreach ($iterator as $file) {
             $fileObject = yaml_parse_file($file->getPathname());
-            var_dump($fileObject);
+            var_dump($fileObject['services']['\App']);
         }
 
         return [];
@@ -66,7 +66,7 @@ class HttpKernel
         set_error_handler($handler);
     }
 
-    public function defaultErrorHandler(int $code, string $message, string $file, int $line, array $context): bool
+    public function defaultErrorHandler(int $code, string $message, string $file, int $line/*, array $context*/): bool
     {
         var_dump($code);
         var_dump($message);
@@ -111,10 +111,10 @@ class HttpKernel
         try {
             $container = Container::getContainer();
 //            $container->set();
-            var_dump($container);
-            var_dump($request->getParameters()->get('a'));
+//            var_dump($container);
+//            var_dump($request->getParameters()->get('a'));
         } catch (\Throwable) {
-            Container::getContainer();
+//            Container::getContainer();
             $content = '<h1>fesfsefsefsefesfsefsef</h1>';
         }
 

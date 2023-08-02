@@ -2,138 +2,30 @@
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" packagePrefix="App\" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/Components/Container/" isTestSource="false" packagePrefix="Container\" />
       <sourceFolder url="file://$MODULE_DIR$/src/Components/Container/tests" isTestSource="true" packagePrefix="Container\Tests\" />
-      <sourceFolder url="file://$MODULE_DIR$/src/Components/EventDispatcher/" isTestSource="false" packagePrefix="App\Components\EventDispatcher\" />
       <sourceFolder url="file://$MODULE_DIR$/src/Components/EventDispatcher/Tests" isTestSource="true" packagePrefix="App\Components\EventDispatcher\Tests\" />
-      <sourceFolder url="file://$MODULE_DIR$/src/Components/Finder/" isTestSource="false" packagePrefix="App\Components\Finder\" />
       <sourceFolder url="file://$MODULE_DIR$/src/Components/Finder/Tests" isTestSource="true" packagePrefix="App\Components\Finder\Tests\" />
-      <sourceFolder url="file://$MODULE_DIR$/src/Components/HttpKernel/" isTestSource="false" packagePrefix="App\Components\HttpKernel\" />
       <sourceFolder url="file://$MODULE_DIR$/src/Components/HttpKernel/Tests" isTestSource="true" packagePrefix="Finder\Tests\" />
-      <sourceFolder url="file://$MODULE_DIR$/src/Components/Routing/" isTestSource="false" packagePrefix="App\Components\Routing\" />
       <sourceFolder url="file://$MODULE_DIR$/src/Components/Routing/Tests" isTestSource="true" packagePrefix="App\Components\Routing\Tests\" />
-      <sourceFolder url="file://$MODULE_DIR$/src/Components/Finder/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/Components/HttpKernel/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/Components/Routing/tests" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/Components/Debug" isTestSource="false" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Container/vendor/composer" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Container/vendor/doctrine/instantiator" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Container/vendor/myclabs/deep-copy" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Container/vendor/nikic/php-parser" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Container/vendor/phar-io/manifest" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Container/vendor/phar-io/version" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Container/vendor/phpstan/phpstan" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Container/vendor/phpunit/php-code-coverage" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Container/vendor/phpunit/php-file-iterator" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Container/vendor/phpunit/php-invoker" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Container/vendor/phpunit/php-text-template" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Container/vendor/phpunit/php-timer" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Container/vendor/phpunit/phpunit" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Container/vendor/sebastian/cli-parser" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Container/vendor/sebastian/code-unit" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Container/vendor/sebastian/code-unit-reverse-lookup" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Container/vendor/sebastian/comparator" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Container/vendor/sebastian/complexity" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Container/vendor/sebastian/diff" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Container/vendor/sebastian/environment" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Container/vendor/sebastian/exporter" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Container/vendor/sebastian/global-state" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Container/vendor/sebastian/lines-of-code" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Container/vendor/sebastian/object-enumerator" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Container/vendor/sebastian/object-reflector" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Container/vendor/sebastian/recursion-context" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Container/vendor/sebastian/resource-operations" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Container/vendor/sebastian/type" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Container/vendor/sebastian/version" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Container/vendor/theseer/tokenizer" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Finder/vendor/composer" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Finder/vendor/doctrine/instantiator" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Finder/vendor/myclabs/deep-copy" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Finder/vendor/nikic/php-parser" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Finder/vendor/phar-io/manifest" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Finder/vendor/phar-io/version" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Finder/vendor/phpunit/php-code-coverage" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Finder/vendor/phpunit/php-file-iterator" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Finder/vendor/phpunit/php-invoker" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Finder/vendor/phpunit/php-text-template" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Finder/vendor/phpunit/php-timer" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Finder/vendor/phpunit/phpunit" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Finder/vendor/sebastian/cli-parser" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Finder/vendor/sebastian/code-unit" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Finder/vendor/sebastian/code-unit-reverse-lookup" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Finder/vendor/sebastian/comparator" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Finder/vendor/sebastian/complexity" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Finder/vendor/sebastian/diff" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Finder/vendor/sebastian/environment" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Finder/vendor/sebastian/exporter" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Finder/vendor/sebastian/global-state" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Finder/vendor/sebastian/lines-of-code" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Finder/vendor/sebastian/object-enumerator" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Finder/vendor/sebastian/object-reflector" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Finder/vendor/sebastian/recursion-context" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Finder/vendor/sebastian/resource-operations" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Finder/vendor/sebastian/type" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Finder/vendor/sebastian/version" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Finder/vendor/theseer/tokenizer" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/HttpKernel/vendor/composer" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/HttpKernel/vendor/doctrine/instantiator" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/HttpKernel/vendor/myclabs/deep-copy" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/HttpKernel/vendor/nikic/php-parser" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/HttpKernel/vendor/phar-io/manifest" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/HttpKernel/vendor/phar-io/version" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/HttpKernel/vendor/phpunit/php-code-coverage" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/HttpKernel/vendor/phpunit/php-file-iterator" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/HttpKernel/vendor/phpunit/php-invoker" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/HttpKernel/vendor/phpunit/php-text-template" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/HttpKernel/vendor/phpunit/php-timer" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/HttpKernel/vendor/phpunit/phpunit" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/HttpKernel/vendor/sebastian/cli-parser" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/HttpKernel/vendor/sebastian/code-unit" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/HttpKernel/vendor/sebastian/code-unit-reverse-lookup" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/HttpKernel/vendor/sebastian/comparator" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/HttpKernel/vendor/sebastian/complexity" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/HttpKernel/vendor/sebastian/diff" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/HttpKernel/vendor/sebastian/environment" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/HttpKernel/vendor/sebastian/exporter" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/HttpKernel/vendor/sebastian/global-state" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/HttpKernel/vendor/sebastian/lines-of-code" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/HttpKernel/vendor/sebastian/object-enumerator" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/HttpKernel/vendor/sebastian/object-reflector" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/HttpKernel/vendor/sebastian/recursion-context" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/HttpKernel/vendor/sebastian/resource-operations" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/HttpKernel/vendor/sebastian/type" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/HttpKernel/vendor/sebastian/version" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/HttpKernel/vendor/theseer/tokenizer" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Routing/vendor/composer" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Routing/vendor/myclabs/deep-copy" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Routing/vendor/nikic/php-parser" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Routing/vendor/phar-io/manifest" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Routing/vendor/phar-io/version" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Routing/vendor/phpunit/php-code-coverage" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Routing/vendor/phpunit/php-file-iterator" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Routing/vendor/phpunit/php-invoker" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Routing/vendor/phpunit/php-text-template" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Routing/vendor/phpunit/php-timer" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Routing/vendor/phpunit/phpunit" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Routing/vendor/sebastian/cli-parser" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Routing/vendor/sebastian/code-unit" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Routing/vendor/sebastian/code-unit-reverse-lookup" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Routing/vendor/sebastian/comparator" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Routing/vendor/sebastian/complexity" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Routing/vendor/sebastian/diff" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Routing/vendor/sebastian/environment" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Routing/vendor/sebastian/exporter" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Routing/vendor/sebastian/global-state" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Routing/vendor/sebastian/lines-of-code" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Routing/vendor/sebastian/object-enumerator" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Routing/vendor/sebastian/object-reflector" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Routing/vendor/sebastian/recursion-context" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Routing/vendor/sebastian/type" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Routing/vendor/sebastian/version" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Components/Routing/vendor/theseer/tokenizer" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/phpstan/phpstan" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Components/Config/Tests" isTestSource="true" packagePrefix="App\Components\Config\Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Components/Config/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Components/Config/" isTestSource="false" packagePrefix="App\Components\Config\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Components/Container/" isTestSource="false" packagePrefix="Container\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Components/EventDispatcher/" isTestSource="false" packagePrefix="App\Components\EventDispatcher\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Components/Finder/" isTestSource="false" packagePrefix="App\Components\Finder\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Components/HttpKernel/" isTestSource="false" packagePrefix="App\Components\HttpKernel\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Components/Routing/" isTestSource="false" packagePrefix="App\Components\Routing\" />
+      <excludeFolder url="file://$MODULE_DIR$/src/Components/Config/vendor" />
+      <excludeFolder url="file://$MODULE_DIR$/src/Components/Container/vendor" />
+      <excludeFolder url="file://$MODULE_DIR$/src/Components/Debug/vendor" />
+      <excludeFolder url="file://$MODULE_DIR$/src/Components/Finder/vendor" />
+      <excludeFolder url="file://$MODULE_DIR$/src/Components/HttpKernel/vendor" />
+      <excludeFolder url="file://$MODULE_DIR$/src/Components/Routing/vendor" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
